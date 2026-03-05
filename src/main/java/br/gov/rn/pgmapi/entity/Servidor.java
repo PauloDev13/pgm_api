@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "servidor")
@@ -40,10 +41,8 @@ public class Servidor {
     @Column(name = "email_institucional", length = 100)
     private String emailInstitucional;
 
-    @Column(length = 255)
     private String endereco;
 
-    @Column(length = 255)
     private String filiacao;
 
     @Column(name = "data_desligamento")
@@ -53,4 +52,45 @@ public class Servidor {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "setor_id")
+    private Setor setor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id")
+    private Setor status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vinculo_id")
+    private Setor vinculo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lotacao_id")
+    private Setor lotacao;
+
+    // Relacionamentos N:N (Tabelas de Junção gerenciadas pelo Hibernate)
+    @ManyToMany
+    @JoinTable(
+            name = "servidor_sistema",
+            joinColumns = @JoinColumn(name = "servidor_id"),
+            inverseJoinColumns = @JoinColumn(name = "sistema_id")
+    )
+    private Set<Sistema> sistemas; // Assumindo classe Sistema
+
+    @ManyToMany
+    @JoinTable(
+            name = "servidor_procurador",
+            joinColumns = @JoinColumn(name = "servidor_id"),
+            inverseJoinColumns = @JoinColumn(name = "procurador_id")
+    )
+    private Set<Procurador> procuradores;
+
+    @ManyToMany
+    @JoinTable(
+            name = "servidor_alias",
+            joinColumns = @JoinColumn(name = "servidor_id"),
+            inverseJoinColumns = @JoinColumn(name = "alias_id")
+    )
+    private Set<Procurador> aliases;
 }
