@@ -8,12 +8,12 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: validate # Em produção, use validate ou flyway/liquibase
+      ddl-auto: validate # Em produï¿½ï¿½o, use validate ou flyway/liquibase
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MariaDBDialect
+#        dialect: org.hibernate.dialect.MariaDBDialect
 
 springdoc:
   swagger-ui:

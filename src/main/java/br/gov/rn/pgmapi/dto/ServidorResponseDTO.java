@@ -9,5 +9,9 @@ public record ServidorResponseDTO(
         String cpf,
         LocalDate dataNascimento,
         String emailPessoal,
-        String emailInstitucional
+        String emailInstitucional,
+        CargoResponseDTO cargo,
+        SetorResponseDTO setor,
+        StatusResponseDTO status,
+        VinculoResponseDTO vinculo
 ){}
